@@ -1,0 +1,96 @@
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f8fafc;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    min-width: 320px;
+}
+
+h1 {
+    color: #1e293b;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.timer {
+    font-size: 5.5rem;
+    font-weight: 700;
+    margin: 2rem 0;
+    color: #0f172a;
+    font-variant-numeric: tabular-nums;
+}
+
+.controls {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.controls button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 100px;
+}
+
+/* Facebook-style colors */
+#start {
+    background-color: #1877f2;  /* Facebook primary blue */
+}
+
+#start:hover {
+    background-color: #166fe5;
+}
+
+#reset {
+    background-color: #e4e6eb;  /* Facebook light gray */
+    color: #050505;            /* Dark text for light button */
+}
+
+#reset:hover {
+    background-color: #d8dadf;
+}
+
+#toggle-mode {
+    background-color: #42b72a;  /* Facebook green */
+}
+
+#toggle-mode:hover {
+    background-color: #36a420;
+}
+
+.mode {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Work mode colors */
+body.work-mode {
+    background-color: #f1f5f9;
+}
+
+/* Break mode colors */
+body.break-mode {
+    background-color: #faf5ff;
+} 
