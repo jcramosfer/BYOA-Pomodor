@@ -8,15 +8,22 @@ const startButton = document.getElementById('start');
 const resetButton = document.getElementById('reset');
 const modeText = document.getElementById('mode-text');
 const toggleModeButton = document.getElementById('toggle-mode');
+const sunIcon = document.getElementById('toggle-mode-sun');
+const moonIcon = document.getElementById('toggle-mode-moon');
 
 const WORK_TIME = 25 * 60; // 25 minutes in seconds
 const BREAK_TIME = 5 * 60; // 5 minutes in seconds
 
-function updateDisplay(timeLeft) {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    minutesDisplay.textContent = minutes.toString().padStart(2, '0');
-    secondsDisplay.textContent = seconds.toString().padStart(2, '0');
+function updateDisplay(timeInSeconds) {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    
+    minutesDisplay.textContent = String(minutes).padStart(2, '0');
+    secondsDisplay.textContent = String(seconds).padStart(2, '0');
+    
+    // Update the page title with the current time
+    const timeString = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    document.title = `${timeString} - Pomodoro Timer`;
 }
 
 function switchMode() {
@@ -30,7 +37,11 @@ function toggleMode() {
     isWorkTime = !isWorkTime;
     timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
     modeText.textContent = isWorkTime ? 'Work Time' : 'Break Time';
-    toggleModeButton.textContent = isWorkTime ? 'Switch to Break' : 'Switch to Work';
+    
+    // Toggle the icon between sun and moon
+    const toggleIcon = document.getElementById('toggle-mode');
+    toggleIcon.className = isWorkTime ? 'fas fa-sun' : 'fas fa-moon';
+    
     updateDisplay(timeLeft);
     updateColors(!isWorkTime);
 }
@@ -71,6 +82,10 @@ function resetTimer() {
     timeLeft = WORK_TIME;
     startButton.textContent = 'Start';
     modeText.textContent = 'Work Time';
+    
+    const toggleIcon = document.getElementById('toggle-mode');
+    toggleIcon.className = 'fas fa-sun';
+    
     updateDisplay(timeLeft);
     updateColors(true);
 }

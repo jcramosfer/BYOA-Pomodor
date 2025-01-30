@@ -93,4 +93,22 @@ body.work-mode {
 /* Break mode colors */
 body.break-mode {
     background-color: #faf5ff;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;  /* Space between title and icon */
+}
+
+#toggle-mode {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+#toggle-mode:hover {
+    color: #666;
 } 
