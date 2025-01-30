@@ -82,11 +82,13 @@ h1 {
 }
 
 #toggle-mode {
-    background-color: var(--fb-green);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--fb-blue);
 }
 
 #toggle-mode:hover {
-    background-color: var(--fb-green-hover);
+    color: var(--fb-blue-hover);
 }
 
 .mode {
@@ -113,17 +115,6 @@ body.break-mode {
     gap: 10px;  /* Space between title and icon */
 }
 
-#toggle-mode {
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: var(--fb-blue);
-    transition: color 0.3s ease;
-}
-
-#toggle-mode:hover {
-    color: var(--fb-blue-hover);
-}
-
 .hidden {
     display: none !important;
     visibility: hidden;
@@ -131,11 +122,11 @@ body.break-mode {
 }
 
 #add-time {
-    background-color: var(--fb-green);
+    background-color: var(--fb-blue);
 }
 
 #add-time:hover {
-    background-color: var(--fb-green-hover);
+    background-color: var(--fb-blue-hover);
 }
 
 .focus-display {

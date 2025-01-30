@@ -177,11 +177,34 @@ focusInput.addEventListener('keypress', (e) => {
     }
 });
 
-// Update showFocusModal function
+// Add event listener for clicking outside the modal
+focusModal.addEventListener('click', (e) => {
+    // If the click is on the modal background (not the content)
+    if (e.target === focusModal) {
+        cancelFocusModal();
+    }
+});
+
+// Add event listener for escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !focusModal.classList.contains('hidden')) {
+        cancelFocusModal();
+    }
+});
+
+// Add function to handle canceling the modal
+function cancelFocusModal() {
+    focusModal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    focusInput.value = '';
+    startButton.textContent = 'Start';  // Reset start button state
+}
+
+// Update showFocusModal to ensure proper state
 function showFocusModal() {
     focusModal.classList.remove('hidden');
     focusInput.focus();
-    document.body.style.overflow = 'hidden';  // Prevent scrolling when modal is open
+    document.body.style.overflow = 'hidden';
 }
 
 // Initialize display
