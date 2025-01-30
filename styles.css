@@ -23,44 +23,47 @@ body {
 .container {
     text-align: center;
     background-color: white;
-    padding: 3rem;
+    padding: 2rem;
     border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-width: 320px;
+    width: 90%;
+    max-width: 500px;
+    margin: 1rem auto;
 }
 
 h1 {
     color: #1e293b;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .timer {
-    font-size: 5.5rem;
+    font-size: clamp(3rem, 15vw, 5.5rem);
+    margin: 1.5rem 0;
+    color: var(--fb-blue);
     font-weight: 700;
-    margin: 2rem 0;
-    color: #0f172a;
     font-variant-numeric: tabular-nums;
 }
 
 .controls {
     display: flex;
     gap: 0.75rem;
+    flex-wrap: wrap;
     justify-content: center;
     margin: 2rem 0;
 }
 
 .controls button {
-    font-size: 1rem;
-    padding: 0.75rem 1.5rem;
+    font-size: clamp(0.9rem, 3vw, 1rem);
+    padding: 0.75rem 1.25rem;
     cursor: pointer;
     color: white;
     border: none;
     border-radius: 12px;
     font-weight: 500;
     transition: all 0.2s ease;
-    min-width: 100px;
+    min-width: 90px;
 }
 
 /* Facebook-style colors */
@@ -93,7 +96,7 @@ h1 {
 
 .mode {
     margin-top: 1.5rem;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
     color: #64748b;
     font-weight: 500;
 }
@@ -130,12 +133,13 @@ body.break-mode {
 }
 
 .focus-display {
-    margin: 10px 0;
-    padding: 8px 16px;
+    margin: 0.75rem 0;
+    padding: 0.5rem 1rem;
     background-color: var(--fb-gray);
     border-radius: 4px;
     color: var(--fb-dark-gray);
     text-align: center;
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
 }
 
 .modal {
@@ -161,21 +165,25 @@ body.break-mode {
     background-color: white;
     padding: 2rem;
     border-radius: 8px;
-    width: 90%;
-    max-width: 500px;
+    width: 85%;
+    max-width: 400px;
     text-align: center;
+    margin: 1rem auto;
 }
 
 .modal-content h2 {
     margin-bottom: 1.5rem;
     color: #333;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
 }
 
 #focus-input {
-    width: 100%;
+    width: 90%;
+    max-width: 400px;
     padding: 0.75rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid #ccc;
+    margin: 1.5rem auto;
+    display: block;
+    border: 1px solid #dddfe2;
     border-radius: 4px;
     font-size: 1rem;
 }
@@ -202,4 +210,40 @@ button {
 
 button:hover {
     background-color: var(--fb-blue-hover);
+}
+
+/* Media queries for different screen sizes */
+@media (max-width: 480px) {
+    .container {
+        width: 85%;
+        padding: 1.5rem;
+    }
+    
+    .controls {
+        gap: 0.5rem;
+    }
+    
+    #toggle-mode {
+        font-size: 1rem;
+    }
+    
+    .modal-content {
+        width: 80%;
+        padding: 1.5rem;
+    }
+    
+    #focus-input {
+        width: 85%;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .controls button {
+        padding: 0.6rem 1rem;
+        min-width: 80px;
+    }
 } 
