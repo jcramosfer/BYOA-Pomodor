@@ -13,11 +13,22 @@
             <h1>Pomodoro Timer</h1>
             <i id="toggle-mode" class="fas fa-sun"></i>
         </div>
+        <div id="focus-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>What are you focusing on this session?</h2>
+                <input type="text" id="focus-input" placeholder="Enter your focus...">
+                <button id="focus-submit">Start</button>
+            </div>
+        </div>
+        <div id="focus-display" class="focus-display hidden">
+            Focus: <span id="focus-text"></span>
+        </div>
         <div class="timer">
             <span id="minutes">25</span>:<span id="seconds">00</span>
         </div>
         <div class="controls">
             <button id="start">Start</button>
+            <button id="add-time" class="hidden">+5 Min</button>
             <button id="reset">Reset</button>
         </div>
         <div class="mode">

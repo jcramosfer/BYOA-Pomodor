@@ -1,3 +1,13 @@
+:root {
+    --fb-blue: #1877f2;
+    --fb-blue-hover: #166fe5;
+    --fb-dark-blue: #1b74e4;
+    --fb-green: #42b72a;
+    --fb-green-hover: #36a420;
+    --fb-gray: #f0f2f5;
+    --fb-dark-gray: #65676b;
+}
+
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     display: flex;
@@ -5,7 +15,8 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #f8fafc;
+    background-color: var(--fb-gray);
+    color: #1c1e21;
     transition: background-color 0.3s ease;
 }
 
@@ -14,7 +25,7 @@ body {
     background-color: white;
     padding: 3rem;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     min-width: 320px;
 }
 
@@ -54,28 +65,28 @@ h1 {
 
 /* Facebook-style colors */
 #start {
-    background-color: #1877f2;  /* Facebook primary blue */
+    background-color: var(--fb-blue);
 }
 
 #start:hover {
-    background-color: #166fe5;
+    background-color: var(--fb-blue-hover);
 }
 
 #reset {
-    background-color: #e4e6eb;  /* Facebook light gray */
-    color: #050505;            /* Dark text for light button */
+    background-color: var(--fb-dark-gray);
+    color: white;
 }
 
 #reset:hover {
-    background-color: #d8dadf;
+    background-color: #4e4f50;
 }
 
 #toggle-mode {
-    background-color: #42b72a;  /* Facebook green */
+    background-color: var(--fb-green);
 }
 
 #toggle-mode:hover {
-    background-color: #36a420;
+    background-color: var(--fb-green-hover);
 }
 
 .mode {
@@ -87,12 +98,12 @@ h1 {
 
 /* Work mode colors */
 body.work-mode {
-    background-color: #f1f5f9;
+    background-color: var(--fb-gray);
 }
 
 /* Break mode colors */
 body.break-mode {
-    background-color: #faf5ff;
+    background-color: #f0f2f5;
 }
 
 .title-container {
@@ -105,10 +116,99 @@ body.break-mode {
 #toggle-mode {
     cursor: pointer;
     font-size: 1.5rem;
-    color: #333;
+    color: var(--fb-blue);
     transition: color 0.3s ease;
 }
 
 #toggle-mode:hover {
-    color: #666;
+    color: var(--fb-blue-hover);
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+    opacity: 0;
+}
+
+#add-time {
+    background-color: var(--fb-green);
+}
+
+#add-time:hover {
+    background-color: var(--fb-green-hover);
+}
+
+.focus-display {
+    margin: 10px 0;
+    padding: 8px 16px;
+    background-color: var(--fb-gray);
+    border-radius: 4px;
+    color: var(--fb-dark-gray);
+    text-align: center;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.modal.hidden {
+    pointer-events: none;
+    z-index: -1;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+#focus-input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#focus-submit {
+    background-color: var(--fb-blue);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#focus-submit:hover {
+    background-color: var(--fb-blue-hover);
+}
+
+button {
+    background-color: var(--fb-blue);
+    color: white;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--fb-blue-hover);
 } 

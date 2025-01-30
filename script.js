@@ -8,8 +8,12 @@ const startButton = document.getElementById('start');
 const resetButton = document.getElementById('reset');
 const modeText = document.getElementById('mode-text');
 const toggleModeButton = document.getElementById('toggle-mode');
-const sunIcon = document.getElementById('toggle-mode-sun');
-const moonIcon = document.getElementById('toggle-mode-moon');
+const addTimeButton = document.getElementById('add-time');
+const focusDisplay = document.getElementById('focus-display');
+const focusText = document.getElementById('focus-text');
+const focusModal = document.getElementById('focus-modal');
+const focusInput = document.getElementById('focus-input');
+const focusSubmit = document.getElementById('focus-submit');
 
 const WORK_TIME = 25 * 60; // 25 minutes in seconds
 const BREAK_TIME = 5 * 60; // 5 minutes in seconds
@@ -26,26 +30,6 @@ function updateDisplay(timeInSeconds) {
     document.title = `${timeString} - Pomodoro Timer`;
 }
 
-function switchMode() {
-    isWorkTime = !isWorkTime;
-    timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
-    modeText.textContent = isWorkTime ? 'Work Time' : 'Break Time';
-    updateDisplay(timeLeft);
-}
-
-function toggleMode() {
-    isWorkTime = !isWorkTime;
-    timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
-    modeText.textContent = isWorkTime ? 'Work Time' : 'Break Time';
-    
-    // Toggle the icon between sun and moon
-    const toggleIcon = document.getElementById('toggle-mode');
-    toggleIcon.className = isWorkTime ? 'fas fa-sun' : 'fas fa-moon';
-    
-    updateDisplay(timeLeft);
-    updateColors(!isWorkTime);
-}
-
 function startTimer() {
     if (timerId !== null) return;
     
@@ -53,7 +37,22 @@ function startTimer() {
         timeLeft = WORK_TIME;
     }
 
+    if (isWorkTime) {
+        showFocusModal();
+        return;
+    }
+
+    startTimerInternal();
+}
+
+function startTimerInternal(focusTask = null) {
+    if (focusTask) {
+        focusText.textContent = focusTask;
+        focusDisplay.classList.remove('hidden');
+    }
+    
     startButton.textContent = 'Pause';
+    addTimeButton.classList.remove('hidden');
     
     timerId = setInterval(() => {
         timeLeft--;
@@ -73,6 +72,7 @@ function pauseTimer() {
     clearInterval(timerId);
     timerId = null;
     startButton.textContent = 'Start';
+    addTimeButton.classList.add('hidden');
 }
 
 function resetTimer() {
@@ -82,6 +82,8 @@ function resetTimer() {
     timeLeft = WORK_TIME;
     startButton.textContent = 'Start';
     modeText.textContent = 'Work Time';
+    addTimeButton.classList.add('hidden');
+    focusDisplay.classList.add('hidden');
     
     const toggleIcon = document.getElementById('toggle-mode');
     toggleIcon.className = 'fas fa-sun';
@@ -90,16 +92,40 @@ function resetTimer() {
     updateColors(true);
 }
 
+function switchMode() {
+    isWorkTime = !isWorkTime;
+    timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
+    modeText.textContent = isWorkTime ? 'Work Time' : 'Break Time';
+    updateDisplay(timeLeft);
+}
+
+function toggleMode() {
+    isWorkTime = !isWorkTime;
+    timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
+    modeText.textContent = isWorkTime ? 'Work Time' : 'Break Time';
+    
+    const toggleIcon = document.getElementById('toggle-mode');
+    toggleIcon.className = isWorkTime ? 'fas fa-sun' : 'fas fa-moon';
+    
+    focusDisplay.classList.add('hidden');
+    
+    updateDisplay(timeLeft);
+    updateColors(!isWorkTime);
+}
+
 function updateColors(isWorkMode) {
     if (isWorkMode) {
         document.body.classList.remove('break-mode');
         document.body.classList.add('work-mode');
-        startButton.style.backgroundColor = '#2563eb';
     } else {
         document.body.classList.remove('work-mode');
         document.body.classList.add('break-mode');
-        startButton.style.backgroundColor = '#7c3aed';
     }
+}
+
+function addFiveMinutes() {
+    timeLeft += 5 * 60; // Add 5 minutes in seconds
+    updateDisplay(timeLeft);
 }
 
 startButton.addEventListener('click', () => {
@@ -120,6 +146,43 @@ toggleModeButton.addEventListener('click', () => {
     }
     toggleMode();
 });
+
+addTimeButton.addEventListener('click', addFiveMinutes);
+
+// Update the focusSubmit event listener
+focusSubmit.addEventListener('click', () => {
+    const focusTask = focusInput.value.trim();
+    if (focusTask) {
+        focusModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';  // Re-enable scrolling
+        startTimerInternal(focusTask);
+        setTimeout(() => {
+            focusInput.value = '';
+        }, 100);
+    }
+});
+
+// Also update the Enter key handler
+focusInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        const focusTask = focusInput.value.trim();
+        if (focusTask) {
+            focusModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';  // Re-enable scrolling
+            startTimerInternal(focusTask);
+            setTimeout(() => {
+                focusInput.value = '';
+            }, 100);
+        }
+    }
+});
+
+// Update showFocusModal function
+function showFocusModal() {
+    focusModal.classList.remove('hidden');
+    focusInput.focus();
+    document.body.style.overflow = 'hidden';  // Prevent scrolling when modal is open
+}
 
 // Initialize display
 timeLeft = WORK_TIME;
